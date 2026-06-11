@@ -32,3 +32,16 @@ A synthesizable, hardware-validated **UART (Universal Asynchronous Receiver-Tran
 │   ├── uart_tb.v           # Behavioral testbench
 │   └── wave.vcd            # Simulated waveform output
 └── README.md               # Documentation
+Design Architecture
+The UART core relies on oversampling (16x the baud rate) in the receiver module to accurately sample data at the center of each bit period, minimizing errors caused by clock drift.
+Block Diagram Concept
+System Clock ───► [ Baud Rate Gen ] ───► 16x Enable Tick
+                           │
+  Data Input  ───► [  UART TX  ] ────────► Serial TX Line
+                           
+  Serial RX Line ─► [  UART RX  ] ────────► Data OutputSimulation & Verification
+The testbench validates the design by looping back the transmitter output to the receiver input, simulating back-to-back data frame transmissions under varying conditions.
+Steps to Run Simulation (Using Icarus Verilog & GTKWave
+
+
+
